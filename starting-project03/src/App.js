@@ -11,10 +11,10 @@ function App() {
   };
 
   return (
-    <div>
+    <>
       <AddUser onAddUser={getUserData} />
       <UsersList userData={userList} />
-    </div>
+    </>
   );
 }
 
