@@ -1,7 +1,7 @@
-import React, {useRef, useImperativeHandle} from 'react'
+import React, {useRef, useImperativeHandle, forwardRef} from 'react'
 import classes from './Input.module.css';
 
-const Input = React.forwardRef(({isValid, type, changeHandler, validateHandler, value, label, ids}, ref) => {
+const Input = forwardRef(({isValid, type, changeHandler, validateHandler, value, label, ids}, ref) => {
 
     const inputRef = useRef();
 
@@ -11,8 +11,8 @@ const Input = React.forwardRef(({isValid, type, changeHandler, validateHandler, 
 
     useImperativeHandle(ref, () => {
         return {
-           focus: activate 
-        } ;
+           focus: activate
+        };
     });
 
   return (

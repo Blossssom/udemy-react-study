@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import Button from '../../UI/Button/Button';
 import styles from './CourseInput.module.css';
 
