@@ -1,10 +1,12 @@
 import { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../store/auth-context';
 import classes from './ProfileForm.module.css';
 
 const ProfileForm = () => {
   const [password, setPassword] = useState('');
 
+  const navigation = useHistory();
   const authCtx = useContext(AuthContext);
   const onChangeHandler = (e) => {
     setPassword(e.target.value);
@@ -14,7 +16,7 @@ const ProfileForm = () => {
     e.preventDefault();
 
     try{
-      const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyDSSh6V0xn25o1OkZF8gtFRiVNOz89IEPo', {
+      await fetch('https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyDSSh6V0xn25o1OkZF8gtFRiVNOz89IEPo', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -28,6 +30,7 @@ const ProfileForm = () => {
         if(!res.ok) {
           throw new Error('Failed')
         }else {
+          navigation.replace('/');
           return res.json();
         }
       });
