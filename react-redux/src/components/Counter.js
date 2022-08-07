@@ -1,6 +1,7 @@
 import classes from './Counter.module.css';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
-import { DECREMENT, INCREASE, INCREMENT, TOGGLESHOW } from '../store/store';
+import { counterActions, DECREMENT, INCREASE, INCREMENT, TOGGLESHOW } from '../store/store';
+
 
 const Counter = () => {
 
@@ -12,29 +13,20 @@ const Counter = () => {
   // redux로 부터 state를 받아오며 그 중 일부를 선택해 반환할 수 있다.
 
   const incrementHandler = () => {
-    dispatch({
-      type: INCREMENT
-    });
+    dispatch(counterActions.increment());
     // dispatch 함수로 action을 reducer로 전달해 값을 갱신시킨다.
   };
 
   const decrementHandler = () => {
-    dispatch({
-      type: DECREMENT
-    });
+    dispatch(counterActions.decrement());
   };
 
   const increaseHandler = () => { 
-    dispatch({
-      type: INCREASE,
-      amount: 5
-    });
+    dispatch(counterActions.increase(5));
   }
   
   const toggleCounterHandler = () => {
-    dispatch({
-      type: TOGGLESHOW
-    })
+    dispatch(counterActions.toggleShow())
   };
 
   return (

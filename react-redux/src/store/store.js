@@ -1,5 +1,4 @@
-import {createStore} from 'redux';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, configureStore } from '@reduxjs/toolkit';
 
 export const INCREMENT = 'INCREMENT';
 export const DECREMENT = 'DECREMENT';
@@ -8,7 +7,7 @@ export const TOGGLESHOW = 'TOGGLESHOW';
 
 const initState = {counter: 0, toggleShow: true};
 
-createSlice({
+const counterSilce = createSlice({
     name: 'counter',
     // slice의 식별자 이름은 임의로 정할 수 있다.,
     initialState: initState,
@@ -20,7 +19,7 @@ createSlice({
             state.counter--;
         },
         increase(state, action) {
-            state.counter += action.amount;
+            state.counter += action.payload;
         },
         toggleShow(state) {
             state.toggleShow = !state.toggleShow;
@@ -28,38 +27,13 @@ createSlice({
     }
 })
 
-const counterReducer = (state = initState, action) => {
-    if(action.type === INCREMENT) {
-        return {
-            counter: state.counter + 1,
-            toggleShow: state.toggleShow
-        }
-    }
 
-    if(action.type === INCREASE) {
-        return {
-            counter: state.counter + action.amount,
-            toggleShow: state.toggleShow
-        }
-    }
 
-    if(action.type === DECREMENT) {
-        return {
-            counter: state.counter - 1,
-            toggleShow: state.toggleShow
-        }
-    }
+const store = configureStore({
+    reducer: counterSilce.reducer
+});
 
-    if(action.type === TOGGLESHOW) {
-        return {
-            counter: state.counter,
-            toggleShow: !state.toggleShow
-        }
-    }
-    
-    return state;
-}
+// configureStore로 여러 리듀서를 하나로 합칠 수 있다.
 
-const store = createStore(counterReducer);
-
+export const counterActions = counterSilce.actions;
 export default store;
